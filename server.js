@@ -181,6 +181,7 @@ function appointmentView(a, viewer) {
       : { id: student.id, name: student.name, className: student.class_name },
     createdAt: a.created_at,
     completedAt: a.completed_at,
+    hasReview: !!db.prepare('SELECT 1 FROM reviews WHERE appointment_id = ?').get(a.id),
   };
 }
 
@@ -890,7 +891,9 @@ function serveStatic(req, res, url) {
     res.writeHead(200, { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'public, max-age=3600' });
     return fs.createReadStream(file).pipe(res);
   }
-  const rel = url.pathname === '/' ? '/index.html' : url.pathname;
+  const rel = url.pathname === '/' ? '/index.html'
+    : (url.pathname === '/app' || url.pathname === '/app/') ? '/mobile.html'
+      : url.pathname;
   const file = path.join(publicDir, path.normalize(rel).replace(/^([.][.][/\\])+/, ''));
   if (!file.startsWith(publicDir) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return notFound(res);
   res.writeHead(200, { 'Content-Type': MIME[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });
