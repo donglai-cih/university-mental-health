@@ -1,0 +1,16 @@
+# 运行时数据与数据库
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# 依赖与日志
+node_modules/
+*.log
+
+# 本地临时文件与授权二维码
+lark_qr.png
+.uploads/
+
+# 从飞书文档下载的素材（仅本地参考）
+doc-fetch-resources/

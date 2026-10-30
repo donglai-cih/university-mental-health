@@ -1,0 +1,14 @@
+{
+  "name": "campus-mental-health",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "校园心理健康咨询平台 · 预约咨询全链路 Web 应用",
+  "scripts": {
+    "start": "node server.js",
+    "reset": "node scripts/reset-db.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
